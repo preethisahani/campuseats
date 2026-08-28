@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Menu Management Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f5f3ef",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#612a00",
+                    "primary-fixed": "#bfe9f7",
+                    "surface-container-highest": "#e4e2de",
+                    "background": "#fbf9f5",
+                    "on-background": "#1b1c1a",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#753400",
+                    "inverse-surface": "#30312e",
+                    "on-secondary-container": "#00567d",
+                    "secondary-fixed-dim": "#8bceff",
+                    "on-secondary-fixed-variant": "#004b6f",
+                    "tertiary-fixed-dim": "#ffb68c",
+                    "primary-container": "#123f4a",
+                    "surface-dim": "#dbdad6",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#006492",
+                    "inverse-on-surface": "#f2f0ed",
+                    "tertiary-fixed": "#ffdbc9",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#321200",
+                    "secondary-container": "#84cbff",
+                    "on-tertiary-container": "#fe8128",
+                    "outline": "#71787b",
+                    "on-surface-variant": "#41484a",
+                    "surface-bright": "#fbf9f5",
+                    "surface-variant": "#e4e2de",
+                    "on-primary-fixed-variant": "#224c58",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c1c8ca",
+                    "on-secondary-fixed": "#001e2f",
+                    "primary": "#002831",
+                    "primary-fixed-dim": "#a3cddb",
+                    "on-surface": "#1b1c1a",
+                    "surface": "#fbf9f5",
+                    "secondary-fixed": "#c9e6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#a3cddb",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#efeeea",
+                    "on-primary-fixed": "#001f27",
+                    "surface-container-high": "#eae8e4",
+                    "tertiary": "#401900",
+                    "surface-tint": "#3b6470",
+                    "on-primary-container": "#81aab7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px",
+                    "md": "16px",
+                    "base": "4px",
+                    "2xl": "48px",
+                    "sm": "8px",
+                    "margin-desktop": "40px",
+                    "3xl": "64px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "gutter": "20px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-sm": ["Be Vietnam Pro"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-sm": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .shadow-level-1 { box-shadow: 0px 2px 4px rgba(18, 63, 74, 0.04); }
+        .shadow-level-2 { box-shadow: 0px 6px 12px rgba(18, 63, 74, 0.08); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container border-r border-outline-variant py-lg px-md z-40">
+<div class="flex items-center gap-3 mb-2xl">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-headline-md">
+                CE
+            </div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Staff Portal</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Central Canteen</p>
+</div>
+</div>
+<button class="w-full bg-on-tertiary-container text-on-primary font-label-bold text-label-bold py-3 rounded-full mb-8 hover:bg-tertiary-container transition-colors shadow-level-1 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Menu Item
+        </button>
+<div class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+                Live Orders
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary-container text-on-secondary-container font-bold translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+                Menu Management
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">schedule</span>
+                Slot Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+                QR Scanner
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+                Analytics
+            </a>
+</div>
+<div class="mt-auto space-y-2 pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined">help</span>
+                Help
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all font-label-bold text-label-bold text-error" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 h-full overflow-y-auto bg-surface-bright pb-2xl">
+<!-- Top App Bar (Mobile) -->
+<header class="md:hidden sticky top-0 bg-surface border-b border-outline-variant px-margin-mobile h-16 flex items-center justify-between z-30 shadow-level-1">
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant p-2 -ml-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-sm text-headline-sm text-primary">Menu Management</span>
+</div>
+<button class="text-primary p-2">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+</header>
+<!-- Page Header -->
+<div class="px-margin-mobile md:px-margin-desktop py-lg md:py-2xl max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-2">Today's Menu</h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                        Items Available: <strong class="text-on-surface">18/24</strong>
+</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-white border border-secondary/50 rounded-lg text-primary focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none shadow-level-1 w-64" placeholder="Search menu..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex overflow-x-auto pb-4 -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0 gap-3 hide-scrollbar">
+<button class="whitespace-nowrap px-4 py-2 bg-primary-container text-on-primary-container rounded-full font-label-sm text-label-sm shadow-level-1 transition-transform active:scale-95">All</button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface text-on-surface-variant border border-outline-variant rounded-full font-label-sm text-label-sm hover:bg-surface-variant transition-colors">Meals</button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface text-on-surface-variant border border-outline-variant rounded-full font-label-sm text-label-sm hover:bg-surface-variant transition-colors">Snacks</button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface text-on-surface-variant border border-outline-variant rounded-full font-label-sm text-label-sm hover:bg-surface-variant transition-colors">Beverages</button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface text-on-surface-variant border border-outline-variant rounded-full font-label-sm text-label-sm hover:bg-surface-variant transition-colors">Desserts</button>
+</div>
+<!-- Menu Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter mt-lg">
+<!-- Food Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-level-1 flex flex-col overflow-hidden hover:shadow-level-2 transition-shadow group relative">
+<div class="absolute top-3 right-3 z-10 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 bg-surface rounded-full shadow flex items-center justify-center text-secondary hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 bg-surface rounded-full shadow flex items-center justify-center text-error hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<div class="h-40 w-full relative">
+<img class="w-full h-full object-cover" data-alt="A vibrant, top-down shot of a classic cheeseburger on a rustic wooden board. The lighting is warm and inviting, highlighting the melty cheese, crisp lettuce, and perfectly seared patty. High-quality food photography style, shallow depth of field, modern campus dining aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0PhudmRha_qMIkxfwIv62yYGG5K4S0ZFKGL2ggWhxs-01RAgHH49H1fonWa0ibHP-MQabMdDFcpK_FhnLoMlcfUWlDq3DNeEN4kUqwrmzF7lHJVi1sACwB09Xi3EGcjqpvxOhsoIb_AW3tMT9S2vKxLD5qQoAZDS33ANjAiiHdI3MI56T0XkwANZSiwLgMBw1kP2xaG2VKt1cjiId-P6F8z7L9Vu7BzHQftnRjGo6Q72Xx02IzViXtg"/>
+<div class="absolute top-3 left-3 px-2 py-1 bg-surface/90 backdrop-blur-sm rounded text-xs font-bold text-success flex items-center gap-1 border border-success/20">
+<span class="w-2 h-2 rounded-full bg-success"></span> Available
+                        </div>
+</div>
+<div class="p-md flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary line-clamp-1">Classic Cheeseburger</h3>
+<span class="font-headline-sm text-headline-sm text-secondary whitespace-nowrap ml-2">$5.99</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-4 flex-1">Juicy beef patty, cheddar, lettuce, tomato, house sauce.</p>
+<div class="flex items-center justify-between pt-3 border-t border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 border border-error flex items-center justify-center rounded-sm">
+<span class="w-2 h-2 bg-error rounded-full"></span>
+</span>
+<span class="text-xs text-on-surface-variant font-medium">Non-Veg</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Food Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-level-1 flex flex-col overflow-hidden hover:shadow-level-2 transition-shadow group relative opacity-60">
+<div class="absolute top-3 right-3 z-10 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 bg-surface rounded-full shadow flex items-center justify-center text-secondary hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 bg-surface rounded-full shadow flex items-center justify-center text-error hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<div class="h-40 w-full relative">
+<img class="w-full h-full object-cover grayscale-[50%]" data-alt="A fresh, crisp garden salad in a modern white bowl, shot from a 45-degree angle. Bright, natural lighting accentuates the vivid greens of the lettuce, bright red cherry tomatoes, and cucumber slices. Clean, healthy dining aesthetic suitable for a campus cafe menu." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCXUZ922xXXlk603lKKWfLDmYLeC3Y--231cKlrqTnoujoX-zIZ87sZ512Fyio4NWdjvDrhJzeBJsf0UkLGOfpudW9kTRJgblDDtdIi5M7NjIM_463pdVWnvgaNSKesbEe0wrjUcYfGIoUpkjmYiOCWuOflJiaUbaehrENDzGisD6b6MdGasW1ejXF3MMWd9LWW6LTnmXFZQiolq2B7UvQ7N4H33GLe4V_Oa7EcRmZdojSZrR5WwoR4g"/>
+<div class="absolute top-3 left-3 px-2 py-1 bg-surface/90 backdrop-blur-sm rounded text-xs font-bold text-error flex items-center gap-1 border border-error/20">
+<span class="w-2 h-2 rounded-full bg-error"></span> Out of Stock
+                        </div>
+</div>
+<div class="p-md flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary line-clamp-1">Garden Salad</h3>
+<span class="font-headline-sm text-headline-sm text-secondary whitespace-nowrap ml-2">$4.50</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-4 flex-1">Mixed greens, cherry tomatoes, cucumbers, balsamic vinaigrette.</p>
+<div class="flex items-center justify-between pt-3 border-t border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 border border-success flex items-center justify-center rounded-sm">
+<span class="w-2 h-2 bg-success rounded-full"></span>
+</span>
+<span class="text-xs text-on-surface-variant font-medium">Veg</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Food Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-level-1 flex flex-col overflow-hidden hover:shadow-level-2 transition-shadow group relative">
+<div class="absolute top-3 right-3 z-10 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 bg-surface rounded-full shadow flex items-center justify-center text-secondary hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 bg-surface rounded-full shadow flex items-center justify-center text-error hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<div class="h-40 w-full relative">
+<img class="w-full h-full object-cover" data-alt="A steaming bowl of rich, creamy tomato soup served with a side of toasted garlic bread. Shot close-up to show texture and warmth. Soft, ambient lighting creates a cozy, comforting food vibe. Modern cafe setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwfY_aTe_E8eoFQwoZVbNxU3SwNC6t348_LlCBJV93bzPbm7unGEMnUZ5E7-WHFN4a_8fJd7mLCmz_Q1mx7WhiWD-9AsFOTwplUygdQkAvW9oqksnPjv7mc27vhjSS1dftE9lFQgxO6u4-jVlI7kZuJjCGUNAdgogANILH3JwuOGpR9dCpvP5YSm-WcM0abKKjqW0q781O61D1XjjAWBdXxPbD1c_PwfMHFI64WHpnh0qiL0WKpdQbvA"/>
+<div class="absolute top-3 left-3 px-2 py-1 bg-surface/90 backdrop-blur-sm rounded text-xs font-bold text-success flex items-center gap-1 border border-success/20">
+<span class="w-2 h-2 rounded-full bg-success"></span> Available
+                        </div>
+</div>
+<div class="p-md flex flex-col flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary line-clamp-1">Tomato Soup</h3>
+<span class="font-headline-sm text-headline-sm text-secondary whitespace-nowrap ml-2">$3.25</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-4 flex-1">Creamy roasted tomato soup, served with a warm dinner roll.</p>
+<div class="flex items-center justify-between pt-3 border-t border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 border border-success flex items-center justify-center rounded-sm">
+<span class="w-2 h-2 bg-success rounded-full"></span>
+</span>
+<span class="text-xs text-on-surface-variant font-medium">Veg</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar for Mobile (Not strictly requested but required by the component definition if it were a top-level destination, though this is a specific dashboard view, we hide it as per instructions to suppress on task-focused or specific admin views if not main user nav, but this is a dashboard. I will omit the user bottom nav to maintain the focus on the staff sidebar layout which transforms appropriately.) -->
+</body></html>

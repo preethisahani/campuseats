@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Confirmation - CampusEats</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#3b6470",
+                        "background": "#fbf9f5",
+                        "secondary-fixed-dim": "#8bceff",
+                        "on-surface-variant": "#41484a",
+                        "outline": "#71787b",
+                        "primary-fixed-dim": "#a3cddb",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container": "#efeeea",
+                        "primary-container": "#123f4a",
+                        "outline-variant": "#c1c8ca",
+                        "primary": "#002831",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-tertiary-container": "#fe8128",
+                        "tertiary-container": "#612a00",
+                        "on-secondary-fixed-variant": "#004b6f",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#321200",
+                        "secondary-container": "#84cbff",
+                        "on-background": "#1b1c1a",
+                        "secondary": "#006492",
+                        "on-primary-container": "#81aab7",
+                        "on-secondary-container": "#00567d",
+                        "on-surface": "#1b1c1a",
+                        "primary-fixed": "#bfe9f7",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#401900",
+                        "surface": "#fbf9f5",
+                        "surface-container-highest": "#e4e2de",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#753400",
+                        "surface-dim": "#dbdad6",
+                        "inverse-primary": "#a3cddb",
+                        "tertiary-fixed-dim": "#ffb68c",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#c9e6ff",
+                        "inverse-surface": "#30312e",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e4e2de",
+                        "on-primary-fixed-variant": "#224c58",
+                        "surface-bright": "#fbf9f5",
+                        "on-primary-fixed": "#001f27",
+                        "on-secondary-fixed": "#001e2f",
+                        "tertiary-fixed": "#ffdbc9",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "base": "4px",
+                        "3xl": "64px",
+                        "gutter": "20px",
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "container-max": "1280px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-bold": ["Be Vietnam Pro"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-sm": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #fbf9f5; }
+        .shadow-level-1 { box-shadow: 0 2px 4px rgba(18, 63, 74, 0.04); }
+        .shadow-level-2 { box-shadow: 0 6px 12px rgba(18, 63, 74, 0.08); }
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased flex flex-col min-h-screen">
+<!-- SUPPRESSED NAV BAR DUE TO TRANSACTIONAL INTENT -->
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop py-2xl md:py-3xl">
+<div class="w-full max-w-md">
+<!-- Success Header -->
+<div class="text-center mb-xl">
+<div class="inline-flex items-center justify-center w-20 h-20 bg-[rgba(254,129,40,0.1)] rounded-full mb-md pulse-animation">
+<span class="material-symbols-outlined text-[40px] text-on-tertiary-container" data-icon="check_circle">check_circle</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-primary mb-sm">Order Confirmed! 🎉</h1>
+<p class="font-body-lg text-on-surface-variant">Your order has been sent to the kitchen.</p>
+</div>
+<!-- Order ID & QR Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-level-1 p-xl mb-xl border border-outline-variant text-center">
+<p class="font-label-bold text-on-surface-variant mb-xs uppercase">Order ID</p>
+<h2 class="font-headline-md text-primary mb-lg tracking-wider">CE1042</h2>
+<div class="bg-surface-container rounded-lg p-lg inline-block shadow-level-1 mb-md">
+<img class="w-48 h-48 object-cover rounded mx-auto" data-alt="A clean, sharp, high-contrast QR code generated in black on a white background. The QR code should be perfectly square and easily scannable, representing a digital ticket or order confirmation in a modern mobile app interface. The image should be strictly the QR code itself without any distracting background elements, suitable for a light-mode UI design focused on utility and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw7wkgaYApapg6l8WwfuSMeaJ1uO_VwQy1enRMHGd5fibyByTshZFLunLEMsN1sbV8EpaDcxMhvHS3myz2yY7nFOrqOpK2-iXjfemaVp4uae1FM_-E0wfzCxsDgL3WyvsqAxNENaqE5ahQMDgBtwol1hCYy75C8K9YTzYNVadW-LTAwdplLg1MIOMteXf6AqxdihyC38bKu8UK9yYiQ4hdkEqoNh75rTKny4Jj0HUWGiBZsDFarxh2Yw"/>
+</div>
+<p class="font-body-sm text-on-surface-variant">Show this QR code at the collection counter when your food is ready.</p>
+</div>
+<!-- Live Tracker -->
+<div class="bg-surface-container-lowest rounded-xl shadow-level-1 p-xl mb-xl border border-outline-variant">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-headline-sm text-primary">Live Status</h3>
+<div class="bg-[rgba(254,129,40,0.1)] text-on-tertiary-container px-3 py-1 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-on-tertiary-container animate-pulse"></span>
+<span class="font-label-sm font-bold uppercase">Preparing</span>
+</div>
+</div>
+<div class="relative">
+<!-- Progress Line Background -->
+<div class="absolute left-[15px] top-4 bottom-8 w-[2px] bg-surface-container-highest z-0"></div>
+<!-- Active Progress Line -->
+<div class="absolute left-[15px] top-4 h-[50%] w-[2px] bg-secondary z-0"></div>
+<ul class="relative z-10 space-y-md">
+<!-- Step 1: Placed -->
+<li class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="check">check</span>
+</div>
+<div class="pt-1">
+<p class="font-body-md font-bold text-primary">Order Placed</p>
+<p class="font-body-sm text-on-surface-variant">12:42 PM</p>
+</div>
+</li>
+<!-- Step 2: Accepted -->
+<li class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px]" data-icon="check">check</span>
+</div>
+<div class="pt-1">
+<p class="font-body-md font-bold text-primary">Accepted</p>
+<p class="font-body-sm text-on-surface-variant">12:43 PM</p>
+</div>
+</li>
+<!-- Step 3: Preparing (Active) -->
+<li class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest border-2 border-secondary flex items-center justify-center shrink-0 relative">
+<div class="w-3 h-3 bg-secondary rounded-full"></div>
+</div>
+<div class="pt-1">
+<p class="font-body-md font-bold text-secondary">Preparing</p>
+<p class="font-body-sm text-secondary font-medium">Food ready in ~8 minutes</p>
+</div>
+</li>
+<!-- Step 4: Ready (Future) -->
+<li class="flex items-start gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px] text-outline-variant" data-icon="room_service">room_service</span>
+</div>
+<div class="pt-1">
+<p class="font-body-md font-bold text-outline">Ready for Collection</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-md">
+<a class="w-full bg-[#fe8128] hover:bg-[#e06d1d] text-white font-label-bold py-3 px-6 rounded-lg text-center shadow-level-1 transition-colors" href="#">
+                    Go back to Home
+                </a>
+<a class="w-full bg-transparent border border-[rgba(0,100,146,0.5)] text-secondary hover:bg-[#c9e6ff] hover:text-on-secondary-container font-label-bold py-3 px-6 rounded-lg text-center transition-colors" href="#">
+                    View Receipt
+                </a>
+</div>
+</div>
+</main>
+<!-- Footer - Excluded to maintain focus on transactional success screen -->
+</body></html>

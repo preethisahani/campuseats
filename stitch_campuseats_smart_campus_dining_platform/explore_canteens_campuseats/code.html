@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CampusEats - Discovery Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#3b6470",
+                        "background": "#fbf9f5",
+                        "secondary-fixed-dim": "#8bceff",
+                        "on-surface-variant": "#41484a",
+                        "outline": "#71787b",
+                        "primary-fixed-dim": "#a3cddb",
+                        "surface-container-low": "#f5f3ef",
+                        "surface-container": "#efeeea",
+                        "primary-container": "#123f4a",
+                        "outline-variant": "#c1c8ca",
+                        "primary": "#002831",
+                        "inverse-on-surface": "#f2f0ed",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#eae8e4",
+                        "on-tertiary-container": "#fe8128",
+                        "tertiary-container": "#612a00",
+                        "on-secondary-fixed-variant": "#004b6f",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#321200",
+                        "secondary-container": "#84cbff",
+                        "on-background": "#1b1c1a",
+                        "secondary": "#006492",
+                        "on-primary-container": "#81aab7",
+                        "on-secondary-container": "#00567d",
+                        "on-surface": "#1b1c1a",
+                        "primary-fixed": "#bfe9f7",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#401900",
+                        "surface": "#fbf9f5",
+                        "surface-container-highest": "#e4e2de",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#753400",
+                        "surface-dim": "#dbdad6",
+                        "inverse-primary": "#a3cddb",
+                        "tertiary-fixed-dim": "#ffb68c",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#c9e6ff",
+                        "inverse-surface": "#30312e",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e4e2de",
+                        "on-primary-fixed-variant": "#224c58",
+                        "surface-bright": "#fbf9f5",
+                        "on-primary-fixed": "#001f27",
+                        "on-secondary-fixed": "#001e2f",
+                        "tertiary-fixed": "#ffdbc9",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "base": "4px",
+                        "3xl": "64px",
+                        "gutter": "20px",
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "container-max": "1280px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-bold": ["Be Vietnam Pro"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-sm": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-bold": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Shadows as per Brand Anchors */
+        .shadow-level-1 { box-shadow: 0 2px 4px rgba(18, 63, 74, 0.04); }
+        .shadow-level-2 { box-shadow: 0 6px 12px rgba(18, 63, 74, 0.08); }
+        .shadow-level-3 { box-shadow: 0 12px 24px rgba(18, 63, 74, 0.12); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col pt-16 pb-16 md:pb-0">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-sm border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<img alt="CampusEats Logo" class="h-10 w-10 object-contain rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiguNFh7ujmONkIAoE65ffxd1WuHpaaOdNivRGq0udAE2bmF3saytAIVfc0OBhzVVZDeSr5RcZ6S3vUERWBjUGWvRA1h_0EHTOLAWNJlAVqKRDVx-gn0JRFrTZgScwGg8rmgYqQORIoMtxPI3D0AeP-6nhgkZJVMp3D1ADYasG9oxtfwgOhlA92PN8TnS2kduzlRdzf1CeS3AIFSoNcE_8qvKp7GVq-YFkxNrSkQHmSnoad9joeJDrirso2dQedmjcTOM"/>
+<span class="font-headline-md text-headline-md text-on-tertiary-container hidden md:block">CampusEats</span>
+</div>
+<nav class="hidden md:flex gap-8 items-center h-full">
+<a class="text-primary font-bold border-b-2 border-secondary h-full flex items-center px-2" href="#">Canteens</a>
+<a class="text-on-surface-variant font-body-md hover:text-secondary transition-colors duration-200 h-full flex items-center px-2" href="#">My Orders</a>
+<a class="text-on-surface-variant font-body-md hover:text-secondary transition-colors duration-200 h-full flex items-center px-2" href="#">Profile</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-secondary transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-secondary transition-colors duration-200">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="bg-on-tertiary-container text-on-tertiary font-label-bold px-4 py-2 rounded-full hover:bg-opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="hidden md:inline">Cart</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+<!-- Greeting & Search Section -->
+<section class="mb-2xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-lg">
+<div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-primary tracking-tight">Good Afternoon, Preethi 👋</h1>
+<p class="font-body-lg text-on-surface-variant mt-sm">Where are you grabbing food today?</p>
+</div>
+</div>
+<div class="relative max-w-2xl">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface border border-outline-variant/50 text-on-surface font-body-md rounded-full py-3 pl-12 pr-4 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary shadow-level-1 transition-all placeholder:text-outline" placeholder="Search for food, canteens, or categories..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 bg-surface-container-high text-on-surface p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">tune</span>
+</button>
+</div>
+</section>
+<!-- Categories / Quick Filters -->
+<section class="mb-2xl flex gap-sm overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex-shrink-0 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-bold flex items-center gap-2 border border-transparent">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+                Trending
+            </button>
+<button class="flex-shrink-0 bg-surface text-on-surface-variant px-4 py-2 rounded-full font-label-bold flex items-center gap-2 border border-outline-variant/50 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">fastfood</span>
+                Quick Bites
+            </button>
+<button class="flex-shrink-0 bg-surface text-on-surface-variant px-4 py-2 rounded-full font-label-bold flex items-center gap-2 border border-outline-variant/50 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">local_pizza</span>
+                Italian
+            </button>
+<button class="flex-shrink-0 bg-surface text-on-surface-variant px-4 py-2 rounded-full font-label-bold flex items-center gap-2 border border-outline-variant/50 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">ramen_dining</span>
+                Asian
+            </button>
+<button class="flex-shrink-0 bg-surface text-on-surface-variant px-4 py-2 rounded-full font-label-bold flex items-center gap-2 border border-outline-variant/50 hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">local_cafe</span>
+                Beverages
+            </button>
+</section>
+<!-- Canteens Grid -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-primary">Campus Canteens</h2>
+<a class="text-secondary font-label-bold flex items-center gap-1 hover:underline" href="#">View Map <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Card 1: Canteen A -->
+<article class="bg-surface rounded-xl shadow-level-1 border border-outline-variant/20 overflow-hidden group hover:shadow-level-2 transition-shadow duration-300 flex flex-col h-full">
+<div class="relative h-48 w-full overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A bright, bustling modern university cafeteria with clean wooden tables, large windows letting in natural sunlight, students chatting while eating, food stations with warm glowing lights overhead, high resolution photography, vibrant colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw9wiBj9kmR6Xpv7KASmxv4xtuLNUT9N3ereGUQcLSR6Ft2zAroagVgtTEKFJfrX1sWuwPZnNJlJBN2d1gBLP8OzXCgQ07DwIF2TtKPEtKoPCPDmDbPqu74G4QMUhVvdBOqXBRE6gzKO7kTrkOHBGFMT_P14QOy-hEWTZkjuu0eC45_L1I8rJ3YLD2f08mfIcSjRviliFMG3TXdJEPbpoCraGIdP3qUEi4yX4-XU2PxK562KbLnwVyIw"/>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-surface/90 backdrop-blur-sm text-primary px-3 py-1 rounded-full font-label-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Main Block
+                            </span>
+</div>
+<div class="absolute top-4 right-4">
+<button class="bg-surface/80 backdrop-blur-sm p-2 rounded-full text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined">favorite_border</span>
+</button>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-sm text-headline-sm text-primary">Canteen A</h3>
+<div class="flex items-center gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined text-[16px] icon-fill">star</span>
+<span class="font-label-bold text-sm">4.8</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-md">
+<span class="bg-[#123f4a]/10 text-[#123f4a] px-2 py-1 rounded-md font-label-sm flex items-center gap-1 border border-[#123f4a]/20">
+<div class="w-2 h-2 rounded-full bg-[#123f4a]"></div> Low Rush
+                            </span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-md font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 5 min wait
+                            </span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-md line-clamp-2">Known for quick combo meals, fresh salads, and a dedicated juice bar. Perfect for a fast bite between classes.</p>
+<div class="mt-auto pt-sm border-t border-secondary-fixed-dim/30">
+<button class="w-full bg-secondary-container/20 text-on-secondary-container hover:bg-secondary hover:text-on-secondary py-3 rounded-lg font-label-bold transition-colors border border-secondary/20">
+                                View Menu
+                            </button>
+</div>
+</div>
+</article>
+<!-- Card 2: Canteen B -->
+<article class="bg-surface rounded-xl shadow-level-1 border border-outline-variant/20 overflow-hidden group hover:shadow-level-2 transition-shadow duration-300 flex flex-col h-full">
+<div class="relative h-48 w-full overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An industrial-chic food court located in a science faculty building, metallic accents, hanging Edison bulbs, students with laptops studying, diverse food stalls in background, cool toned lighting, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrzsVKpvdAabgzd7txVA3y2V1l7O7rco2g__Bcx3fR-zNCo0v_zH3cdywPbkDlloJidWJTrqt2Z2a2fGDYphHQHg90va5lqkWAT-FIpNfvNcy3lG3VUeXfTiLqflqcO2pEWoxkrdjY2xi4YBSVVcLrvaA31xIWaaeNq2zz9Dg0eSjpo6vfijxXIyAxGGRrHxTeNVimvg_oYfev_wxcQ4mFtagedXyUEESXKD0uJZRK3BLD3V5lk8v73w"/>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-surface/90 backdrop-blur-sm text-primary px-3 py-1 rounded-full font-label-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">science</span> Science Block
+                            </span>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-sm text-headline-sm text-primary">Canteen B</h3>
+<div class="flex items-center gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined text-[16px] icon-fill">star</span>
+<span class="font-label-bold text-sm">4.2</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-md">
+<span class="bg-[#fe8128]/10 text-[#fe8128] px-2 py-1 rounded-md font-label-sm flex items-center gap-1 border border-[#fe8128]/20">
+<div class="w-2 h-2 rounded-full bg-[#fe8128]"></div> Moderate Rush
+                            </span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-md font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 12 min wait
+                            </span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-md line-clamp-2">Hearty hot meals, international cuisine stations, and the famous build-your-own sandwich bar.</p>
+<div class="mt-auto pt-sm border-t border-secondary-fixed-dim/30">
+<button class="w-full bg-secondary-container/20 text-on-secondary-container hover:bg-secondary hover:text-on-secondary py-3 rounded-lg font-label-bold transition-colors border border-secondary/20">
+                                View Menu
+                            </button>
+</div>
+</div>
+</article>
+<!-- Card 3: Cafe Central -->
+<article class="bg-surface rounded-xl shadow-level-1 border border-outline-variant/20 overflow-hidden group hover:shadow-level-2 transition-shadow duration-300 flex flex-col h-full">
+<div class="relative h-48 w-full overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A cozy, atmospheric coffee shop adjacent to a grand library, warm ambient lighting, espresso machine steaming, students reading books while sipping coffee, pastries displayed in glass case, moody and inviting aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrY-kmhGUl-oHhb_cVvAb0-37xBQKcg-SnMz-bDihciIfvEI7xUQGPRqjyQ4oPLB4KTcgwpt2OuNJET5kAQcxEb7YXzNXH_mEI1LaU6rjSEiW09Q2EH5-ichoiSiUDaSptFGn39sRox9TEe3mAXbOe61cXhRQ4e9e37-J6O2jYNhpAeuAf9UpZsjLLfMRXHcR8KgCPUYBTbnG_PR7qqBW9ZvLMjJnh4ZGBbTEM0HYAhUjKkT6P1Fq43g"/>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-surface/90 backdrop-blur-sm text-primary px-3 py-1 rounded-full font-label-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">menu_book</span> Library Block
+                            </span>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-sm text-headline-sm text-primary">Cafe Central</h3>
+<div class="flex items-center gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined text-[16px] icon-fill">star</span>
+<span class="font-label-bold text-sm">4.9</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-md">
+<span class="bg-[#ba1a1a]/10 text-[#ba1a1a] px-2 py-1 rounded-md font-label-sm flex items-center gap-1 border border-[#ba1a1a]/20">
+<div class="w-2 h-2 rounded-full bg-[#ba1a1a]"></div> Busy
+                            </span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-md font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 20 min wait
+                            </span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-md line-clamp-2">Premium artisanal coffee, freshly baked pastries, and light sandwiches. The ultimate study spot.</p>
+<div class="mt-auto pt-sm border-t border-secondary-fixed-dim/30">
+<button class="w-full bg-secondary-container/20 text-on-secondary-container hover:bg-secondary hover:text-on-secondary py-3 rounded-lg font-label-bold transition-colors border border-secondary/20">
+                                View Menu
+                            </button>
+</div>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-16 px-4 pb-safe md:hidden bg-surface border-t border-outline-variant shadow-[0_-4px_12px_rgba(18,63,74,0.08)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-90 transition-all" href="#">
+<span class="material-symbols-outlined icon-fill">search</span>
+<span class="font-label-sm text-label-sm mt-1">Browse</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-sm text-label-sm mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-sm text-label-sm mt-1">Track</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+<!-- Footer (Desktop Only for this view, pushed down) -->
+<footer class="hidden md:flex w-full bg-surface-container-lowest py-xl border-t border-outline-variant mt-auto">
+<div class="w-full max-w-container-max mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="font-headline-sm text-on-surface">© 2024 CampusEats. OrderSmart. Skip the Queue.</div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-secondary font-body-sm text-body-sm transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-secondary font-body-sm text-body-sm transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-secondary font-body-sm text-body-sm transition-colors" href="#">Canteen Partner Portal</a>
+<a class="text-on-surface-variant hover:text-secondary font-body-sm text-body-sm transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</body></html>

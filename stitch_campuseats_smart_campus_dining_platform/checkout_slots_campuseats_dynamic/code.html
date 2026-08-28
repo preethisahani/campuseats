@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CampusEats - Pickup Time Slot and Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#3b6470",
+                      "background": "#fbf9f5",
+                      "secondary-fixed-dim": "#8bceff",
+                      "on-surface-variant": "#41484a",
+                      "outline": "#71787b",
+                      "primary-fixed-dim": "#a3cddb",
+                      "surface-container-low": "#f5f3ef",
+                      "surface-container": "#efeeea",
+                      "primary-container": "#123f4a",
+                      "outline-variant": "#c1c8ca",
+                      "primary": "#002831",
+                      "inverse-on-surface": "#f2f0ed",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#eae8e4",
+                      "on-tertiary-container": "#fe8128",
+                      "tertiary-container": "#612a00",
+                      "on-secondary-fixed-variant": "#004b6f",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#321200",
+                      "secondary-container": "#84cbff",
+                      "on-background": "#1b1c1a",
+                      "secondary": "#006492",
+                      "on-primary-container": "#81aab7",
+                      "on-secondary-container": "#00567d",
+                      "on-surface": "#1b1c1a",
+                      "primary-fixed": "#bfe9f7",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#401900",
+                      "surface": "#fbf9f5",
+                      "surface-container-highest": "#e4e2de",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#753400",
+                      "surface-dim": "#dbdad6",
+                      "inverse-primary": "#a3cddb",
+                      "tertiary-fixed-dim": "#ffb68c",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#c9e6ff",
+                      "inverse-surface": "#30312e",
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e4e2de",
+                      "on-primary-fixed-variant": "#224c58",
+                      "surface-bright": "#fbf9f5",
+                      "on-primary-fixed": "#001f27",
+                      "on-secondary-fixed": "#001e2f",
+                      "tertiary-fixed": "#ffdbc9",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "base": "4px",
+                      "3xl": "64px",
+                      "gutter": "20px",
+                      "2xl": "48px",
+                      "xl": "32px",
+                      "container-max": "1280px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "margin-mobile": "16px",
+                      "lg": "24px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-bold": [
+                              "Be Vietnam Pro"
+                      ],
+                      "display-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-sm": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-md": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-sm": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .shadow-level-1 {
+            box-shadow: 0 2px 4px rgba(18, 63, 74, 0.04);
+        }
+        .shadow-level-2 {
+            box-shadow: 0 6px 12px rgba(18, 63, 74, 0.08);
+        }
+        .shadow-level-3 {
+            box-shadow: 0 12px 24px rgba(18, 63, 74, 0.12);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen pb-20 md:pb-0">
+<!-- TopNavBar -->
+<nav class="bg-surface border-b border-outline-variant shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center space-x-xl">
+<span class="font-headline-md text-headline-md text-on-tertiary-container">CampusEats</span>
+<div class="hidden md:flex space-x-lg">
+<a class="text-on-surface-variant font-body-md hover:text-secondary transition-colors duration-200" href="#">Canteens</a>
+<a class="text-primary font-bold border-b-2 border-secondary hover:text-secondary transition-colors duration-200" href="#">My Orders</a>
+<a class="text-on-surface-variant font-body-md hover:text-secondary transition-colors duration-200" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center space-x-md text-primary">
+<button aria-label="Cart" class="hover:text-secondary transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button aria-label="Notifications" class="hover:text-secondary transition-colors duration-200 hidden md:block">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Account" class="hover:text-secondary transition-colors duration-200 hidden md:block">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-24 pb-2xl md:py-3xl mt-16"><div class="bg-primary-container text-on-primary-container p-md rounded-xl mb-xl flex items-center gap-md shadow-sm"><span class="material-symbols-outlined" data-icon="info">info</span><p class="font-body-md">Smart Pickup: Slots auto-adjust based on live canteen queue.</p></div>
+<div class="flex flex-col lg:flex-row gap-2xl">
+<!-- Left Column: Time Slots -->
+<div class="flex-1 space-y-xl">
+<div class="mb-lg">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-sm">Choose Your Pickup Time</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Select a convenient time window to grab your order from the Central Canteen.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-md"><!-- Slot 1: Fast Pick -->
+<label class="cursor-pointer relative block">
+<input class="peer sr-only" name="time_slot" type="radio"/>
+<div class="bg-surface rounded-xl p-md border-2 border-outline-variant peer-checked:border-primary-container peer-checked:shadow-level-2 hover:shadow-level-1 transition-all h-full flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<span class="material-symbols-outlined text-primary-container" data-icon="schedule">schedule</span>
+<span class="bg-[#e6f4ea] text-[#1e8e3e] px-2 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-[#1e8e3e]"></div>
+                    Fast Pick
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary">12:30 PM</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">to 12:45 PM</p>
+</div>
+</div>
+</label>
+<!-- Slot 2: Busy -->
+<label class="cursor-pointer relative block">
+<input checked="" class="peer sr-only" name="time_slot" type="radio"/>
+<div class="bg-surface rounded-xl p-md border-2 border-outline-variant peer-checked:border-primary-container peer-checked:shadow-level-2 hover:shadow-level-1 transition-all h-full flex flex-col justify-between relative overflow-hidden">
+<div class="absolute inset-0 bg-primary-container opacity-0 peer-checked:opacity-5 transition-opacity"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-sm">
+<span class="material-symbols-outlined text-primary-container" data-icon="schedule">schedule</span>
+<span class="bg-[#fce8e6] text-on-tertiary-container px-2 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></div>
+                    Busy
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary">1:00 PM</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">to 1:15 PM</p>
+</div>
+</div>
+</label>
+<!-- Slot 3: Cap Reached -->
+<label class="cursor-not-allowed relative block opacity-50">
+<input class="peer sr-only" disabled="" name="time_slot" type="radio"/>
+<div class="bg-surface-variant rounded-xl p-md border-2 border-transparent h-full flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-sm">
+<span class="material-symbols-outlined text-outline" data-icon="block">block</span>
+<span class="bg-[#fce8e6] text-[#d93025] px-2 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+                    Cap Reached
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface-variant line-through">1:15 PM</h3>
+<p class="font-body-sm text-body-sm text-outline">to 1:30 PM</p>
+</div>
+</div>
+</label></div>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="w-full lg:w-96 flex-shrink-0">
+<div class="bg-surface rounded-xl shadow-level-1 border border-outline-variant p-lg sticky top-24">
+<h2 class="font-headline-md text-headline-md text-primary border-b border-outline-variant pb-sm mb-md">Order Summary</h2>
+<div class="space-y-md mb-lg">
+<!-- Item 1 -->
+<div class="flex justify-between items-start">
+<div class="flex gap-sm">
+<span class="font-label-bold text-label-bold text-primary bg-surface-variant px-2 py-1 rounded-md h-fit">1x</span>
+<div>
+<p class="font-body-md text-body-md text-primary font-medium">Spicy Basil Chicken Rice</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Extra egg</p>
+</div>
+</div>
+<span class="font-body-md text-body-md text-primary">$8.50</span>
+</div>
+<!-- Item 2 -->
+<div class="flex justify-between items-start">
+<div class="flex gap-sm">
+<span class="font-label-bold text-label-bold text-primary bg-surface-variant px-2 py-1 rounded-md h-fit">2x</span>
+<div>
+<p class="font-body-md text-body-md text-primary font-medium">Iced Lemon Tea</p>
+</div>
+</div>
+<span class="font-body-md text-body-md text-primary">$4.00</span>
+</div>
+</div>
+<div class="border-t border-outline-variant pt-md mb-xl space-y-2">
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Subtotal</span>
+<span>$12.50</span>
+</div>
+<div class="flex justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>Platform Fee</span>
+<span>$0.50</span>
+</div>
+<div class="flex justify-between font-headline-sm text-headline-sm text-primary mt-sm pt-sm border-t border-dashed border-outline-variant">
+<span>Total</span>
+<span>$13.00</span>
+</div>
+</div>
+<button class="w-full bg-on-tertiary-container hover:bg-[#e67020] text-on-primary font-label-bold text-label-bold py-3 rounded-lg shadow-level-1 hover:shadow-level-2 transition-all flex justify-center items-center gap-2">
+                        Proceed to Payment
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="text-center font-body-sm text-body-sm text-outline mt-sm">Secure checkout powered by CampusPay</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface border-t border-outline-variant shadow-[0_-4px_12px_rgba(18,63,74,0.08)] fixed bottom-0 w-full z-50 flex justify-around items-center h-16 px-4 pb-safe md:hidden rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm mt-1">Browse</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-sm text-label-sm mt-1">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-sm text-label-sm mt-1">Track</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

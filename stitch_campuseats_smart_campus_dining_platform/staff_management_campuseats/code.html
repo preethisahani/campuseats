@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Staff Portal - CampusEats</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#3b6470",
+                      "background": "#fbf9f5",
+                      "secondary-fixed-dim": "#8bceff",
+                      "on-surface-variant": "#41484a",
+                      "outline": "#71787b",
+                      "primary-fixed-dim": "#a3cddb",
+                      "surface-container-low": "#f5f3ef",
+                      "surface-container": "#efeeea",
+                      "primary-container": "#123f4a",
+                      "outline-variant": "#c1c8ca",
+                      "primary": "#002831",
+                      "inverse-on-surface": "#f2f0ed",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#eae8e4",
+                      "on-tertiary-container": "#fe8128",
+                      "tertiary-container": "#612a00",
+                      "on-secondary-fixed-variant": "#004b6f",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#321200",
+                      "secondary-container": "#84cbff",
+                      "on-background": "#1b1c1a",
+                      "secondary": "#006492",
+                      "on-primary-container": "#81aab7",
+                      "on-secondary-container": "#00567d",
+                      "on-surface": "#1b1c1a",
+                      "primary-fixed": "#bfe9f7",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#401900",
+                      "surface": "#fbf9f5",
+                      "surface-container-highest": "#e4e2de",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#753400",
+                      "surface-dim": "#dbdad6",
+                      "inverse-primary": "#a3cddb",
+                      "tertiary-fixed-dim": "#ffb68c",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#c9e6ff",
+                      "inverse-surface": "#30312e",
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e4e2de",
+                      "on-primary-fixed-variant": "#224c58",
+                      "surface-bright": "#fbf9f5",
+                      "on-primary-fixed": "#001f27",
+                      "on-secondary-fixed": "#001e2f",
+                      "tertiary-fixed": "#ffdbc9",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "base": "4px",
+                      "3xl": "64px",
+                      "gutter": "20px",
+                      "2xl": "48px",
+                      "xl": "32px",
+                      "container-max": "1280px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "margin-mobile": "16px",
+                      "lg": "24px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-bold": [
+                              "Be Vietnam Pro"
+                      ],
+                      "display-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-sm": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-sm": [
+                              "Be Vietnam Pro"
+                      ],
+                      "body-md": [
+                              "Be Vietnam Pro"
+                      ],
+                      "headline-sm": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-bold": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        .shadow-ambient-low {
+            box-shadow: 0 2px 4px rgba(18, 63, 74, 0.04);
+        }
+        .shadow-ambient-active {
+            box-shadow: 0 6px 12px rgba(18, 63, 74, 0.08);
+        }
+        .scanner-frame {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .scanner-frame::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 2px solid rgba(254, 129, 40, 0.5); /* Accent Orange */
+            border-radius: 1rem;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .scanner-corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-color: #fe8128; /* Accent Orange */
+            border-style: solid;
+            z-index: 20;
+        }
+        .corner-tl { top: 16px; left: 16px; border-width: 4px 0 0 4px; border-top-left-radius: 8px; }
+        .corner-tr { top: 16px; right: 16px; border-width: 4px 4px 0 0; border-top-right-radius: 8px; }
+        .corner-bl { bottom: 16px; left: 16px; border-width: 0 0 4px 4px; border-bottom-left-radius: 8px; }
+        .corner-br { bottom: 16px; right: 16px; border-width: 0 4px 4px 0; border-bottom-right-radius: 8px; }
+        
+        .scanning-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #fe8128;
+            box-shadow: 0 0 8px #fe8128;
+            animation: scan 2s infinite linear;
+            z-index: 15;
+        }
+        @keyframes scan {
+            0% { top: 10%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 90%; opacity: 0; }
+        }
+        
+        /* Toggle Switch Customization */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #002831; /* primary */
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #002831; /* primary */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden min-h-screen">
+<!-- Mobile Nav Wrapper (Hidden on desktop) -->
+<div class="md:hidden block">
+<!-- TopAppBar (Mobile Context) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface border-b border-outline-variant shadow-sm shadow-ambient-low">
+<div class="font-headline-md text-on-tertiary-container font-bold flex items-center gap-2">
+<span class="material-symbols-outlined icon-fill">school</span>
+                CampusEats
+            </div>
+<div class="flex items-center gap-4">
+<button class="text-primary hover:text-secondary transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-sm">
+                    CS
+                </div>
+</div>
+</header>
+<div class="h-16"></div> <!-- Spacer for mobile top nav -->
+</div>
+<!-- Desktop SideNav & Layout Wrapper -->
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col h-full py-lg px-md w-64 bg-surface-container border-r border-outline-variant flex-shrink-0 z-40">
+<div class="mb-2xl px-md">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined icon-fill">admin_panel_settings</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Staff Portal</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Central Canteen</p>
+</div>
+</div>
+</div>
+<button class="w-full mb-xl bg-on-tertiary-container hover:bg-[#e67524] text-white font-label-bold text-label-bold py-3 rounded-lg shadow-ambient-low hover:shadow-ambient-active transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                New Menu Item
+            </button>
+<nav class="flex-1 overflow-y-auto space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<!-- Live Orders -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+                    Live Orders
+                </a>
+<!-- Menu Management -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="restaurant_menu">restaurant_menu</span>
+                    Menu Management
+                </a>
+<!-- Slot Settings -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+                    Slot Settings
+                </a>
+<!-- QR Scanner (ACTIVE) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary-container text-on-secondary-container font-bold translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined icon-fill" data-icon="qr_code_scanner">qr_code_scanner</span>
+                    QR Scanner
+                </a>
+<!-- Analytics -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+                    Analytics
+                </a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                    Help
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-error hover:bg-error-container hover:text-on-error-container transition-all font-label-bold text-label-bold" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    Logout
+                </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background p-margin-mobile md:p-margin-desktop pb-24 md:pb-margin-desktop">
+<div class="max-w-container-max mx-auto h-full flex flex-col md:flex-row gap-lg md:gap-xl">
+<!-- Left Column: Scanner Context -->
+<section class="flex-1 flex flex-col gap-lg min-w-[300px]">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Scan Order</h2>
+<p class="text-body-sm text-on-surface-variant mt-1">Verify student pickups securely.</p>
+</div>
+</div>
+<!-- Main Scanner Window -->
+<div class="bg-surface p-md rounded-xl shadow-ambient-low flex flex-col items-center justify-center flex-1 min-h-[400px] border border-outline-variant/30 relative">
+<div class="w-full max-w-sm aspect-square scanner-frame bg-surface-container-low rounded-xl relative shadow-inner">
+<div class="corner-tl scanner-corner"></div>
+<div class="corner-tr scanner-corner"></div>
+<div class="corner-bl scanner-corner"></div>
+<div class="corner-br scanner-corner"></div>
+<div class="scanning-line"></div>
+<!-- Simulated Camera Feed Background -->
+<div class="absolute inset-0 bg-cover bg-center opacity-40 rounded-xl" data-alt="A slightly blurred, bright cafeteria environment serving as a background for a QR code scanner, high key lighting, modern interior, vibrant atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNm11b-M3OE75Y3ft6yai1jkXQu42Uup7KcmJ0jgCFLaxB3KJpi-Rk186fZkdSmY1TJ8RA8VgXGLwYI-tYP_ITuV80KYwVOp0_4apRnFYVV24mXG4UOPZNp6H-NUzO5mgNwecXS1G61GwiR4WnXip1WK8heeP8iJQp5qXK7aOH3t9ur6DKSIdQ0ntwF3FFicQoDC9GbcWqveolNO4yIAUVStLylNXaIAvGMnUqRsQLXt5k2DB_ZtVy6w')"></div>
+<div class="absolute inset-0 flex items-center justify-center flex-col text-primary/70 z-10">
+<span class="material-symbols-outlined text-3xl mb-2">qr_code_2</span>
+<span class="font-label-bold text-label-bold tracking-wide">ALIGN QR CODE</span>
+</div>
+</div>
+<p class="mt-lg text-body-sm text-on-surface-variant text-center max-w-xs">
+                            Point the camera at the student's digital receipt to verify order contents instantly.
+                        </p>
+</div>
+</section>
+<!-- Right Column: Results & Quick Menu Ops -->
+<section class="w-full md:w-96 flex flex-col gap-lg flex-shrink-0">
+<!-- Verification Card (Simulated Success State) -->
+<div class="bg-surface rounded-xl p-lg shadow-ambient-active border-t-4 border-[#3b6470] relative overflow-hidden">
+<!-- Subtle decorative background element -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary-fixed rounded-full opacity-20 blur-2xl pointer-events-none"></div>
+<div class="flex items-start gap-md mb-md relative z-10">
+<div class="w-12 h-12 rounded-full bg-[#e6f4ea] text-[#137333] flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined icon-fill text-3xl">check_circle</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Order Verified</h3>
+<p class="text-body-sm text-on-surface-variant">Order #CE-8924</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-md border border-outline-variant/50 mb-md">
+<div class="flex justify-between items-center border-b border-outline-variant/30 pb-2 mb-2">
+<span class="font-label-bold text-label-bold text-outline">STUDENT</span>
+<span class="font-body-md font-medium text-on-surface">Alex Mercer</span>
+</div>
+<div class="space-y-3 mt-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-2">
+<span class="font-bold text-primary">1x</span>
+<span class="text-body-sm text-on-surface">Spicy Ramen Bowl</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm">ramen_dining</span>
+</div>
+<div class="flex justify-between items-start">
+<div class="flex gap-2">
+<span class="font-bold text-primary">2x</span>
+<span class="text-body-sm text-on-surface">Iced Matcha Latte</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm">local_cafe</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-[#123f4a] text-white hover:bg-[#002831] font-label-bold py-3 rounded-lg transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined">task_alt</span>
+                            Mark as Picked Up
+                        </button>
+</div>
+<!-- Quick Menu Availability (Mini Bento) -->
+<div class="bg-surface rounded-xl p-lg shadow-ambient-low border border-outline-variant/30 flex-1 flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-sm text-headline-sm text-primary">Quick Menu Edit</h3>
+<button class="text-secondary hover:text-on-tertiary-container transition-colors p-1 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<div class="space-y-4 overflow-y-auto flex-1 pr-2">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest border border-outline-variant/20">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-md object-cover" data-alt="A small, stylized icon of a ramen bowl, clean lines, flat vector style, appetizing orange and yellow tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOqUzc58Bp-e7R8yaIg8FoyPuuFIT6KnLAeBBx3jAZqQ4bbD-fEoHU0fthIbNVFQExXeiLpzuErQBSx6hjRGNu_3NYrjdG8SAIuVVBWArkAKY77PgvCelmGBrl-PnTyFv25-xT4UselbQd20Ro3_YWHG4XMFCWfov9gBgY9woaT_Sz3S14WkeEc9OtAdFi197yTuNo3DCWtAK9oTMIHSw4YmHIAEp1rlkvdeoIL85ft6YASvptunrb2Q"/>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface">Spicy Ramen</p>
+<p class="text-label-sm text-on-surface-variant">32 remaining</p>
+</div>
+</div>
+<!-- Toggle -->
+<label class="flex items-center cursor-pointer">
+<div class="relative">
+<input checked="" class="sr-only toggle-checkbox" id="toggle1" type="checkbox"/>
+<div class="block bg-outline-variant w-10 h-6 rounded-full toggle-label transition-colors"></div>
+<div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform peer-checked:translate-x-4"></div>
+</div>
+</label>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest border border-outline-variant/20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-surface-variant flex items-center justify-center text-outline">
+<span class="material-symbols-outlined">lunch_dining</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface opacity-50">Classic Burger</p>
+<p class="text-label-sm text-error">Sold Out</p>
+</div>
+</div>
+<!-- Toggle (Off) -->
+<label class="flex items-center cursor-pointer">
+<div class="relative">
+<input class="sr-only peer" id="toggle2" type="checkbox"/>
+<div class="block bg-outline-variant w-10 h-6 rounded-full peer-checked:bg-primary transition-colors"></div>
+<div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform peer-checked:translate-x-4"></div>
+</div>
+</label>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest border border-outline-variant/20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-md bg-surface-variant flex items-center justify-center text-outline">
+<span class="material-symbols-outlined">local_pizza</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface">Veggie Slice</p>
+<p class="text-label-sm text-on-surface-variant">14 remaining</p>
+</div>
+</div>
+<!-- Toggle (On) -->
+<label class="flex items-center cursor-pointer">
+<div class="relative">
+<input checked="" class="sr-only peer" id="toggle3" type="checkbox"/>
+<div class="block bg-outline-variant w-10 h-6 rounded-full peer-checked:bg-primary transition-colors"></div>
+<div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform peer-checked:translate-x-4"></div>
+</div>
+</label>
+</div>
+</div>
+<a class="mt-4 text-center text-label-bold font-label-bold text-secondary hover:underline py-2 block" href="#">
+                            Manage Full Menu →
+                        </a>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Context) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-16 px-4 pb-safe md:hidden bg-surface border-t border-outline-variant shadow-[0_-4px_12px_rgba(18,63,74,0.08)] rounded-t-xl">
+<!-- Browse -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span>Browse</span>
+</a>
+<!-- Orders -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Orders</span>
+</a>
+<!-- Track (Repurposed for QR on Staff mobile view for consistency with request, though technically staff nav is different. Mapping logically.) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-95 transition-all shadow-ambient-low font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined icon-fill" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span>Scan</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Profile</span>
+</a>
+</nav>
+<!-- Custom CSS for toggle dots (Tailwind peer doesn't always handle nested absolute well without custom setup depending on version, fallback styling applied) -->
+<style>
+        input:checked ~ .dot {
+            transform: translateX(100%);
+            background-color: white;
+        }
+    </style>
+</body></html>

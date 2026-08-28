@@ -1,0 +1,160 @@
+import '../models/food_item.dart';
+
+class AppConstants {
+  static const String appName = 'CampusEats';
+  static const int maxSlotCapacity = 20;
+  static const int busyThreshold = 8;
+
+  // Available Pickup Slots
+  static const List<String> pickupSlots = [
+    '12:30 PM',
+    '12:45 PM',
+    '1:00 PM',
+    '1:15 PM',
+    '1:30 PM',
+    '1:45 PM',
+    '2:00 PM',
+    '2:15 PM',
+    '2:30 PM',
+  ];
+
+  // Default Campus Canteens
+  static const List<Map<String, dynamic>> canteens = [
+    {
+      'id': 'canteen_a',
+      'name': 'Canteen A (North Campus Hub)',
+      'location': 'Student Activity Center, Level 1',
+      'rating': 4.8,
+      'reviews': 342,
+      'occupancy': 45, // %
+      'waitTime': '8-12 mins',
+      'tags': ['North Indian', 'Snacks', 'Beverages', 'Fast Food'],
+      'image': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
+      'isOpen': true,
+    },
+    {
+      'id': 'canteen_b',
+      'name': 'Engineering Block Bistro',
+      'location': 'Tech Block 3, Ground Floor',
+      'rating': 4.6,
+      'reviews': 218,
+      'occupancy': 78,
+      'waitTime': '15-20 mins',
+      'tags': ['South Indian', 'Quick Bites', 'Coffee'],
+      'image': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+      'isOpen': true,
+    },
+    {
+      'id': 'canteen_c',
+      'name': 'Green Leaf Health Cafe',
+      'location': 'Sports Complex Arcade',
+      'rating': 4.9,
+      'reviews': 180,
+      'occupancy': 25,
+      'waitTime': '5-8 mins',
+      'tags': ['Salads', 'Smoothies', 'Healthy Bowls'],
+      'image': 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80',
+      'isOpen': true,
+    },
+  ];
+
+  // Canteen A Menu Catalog
+  static final List<FoodItem> defaultMenu = [
+    FoodItem(
+      id: 'item_1',
+      name: 'Crispy Aloo Samosa (2 pcs)',
+      description: 'Golden fried crispy pastry stuffed with spiced potatoes & peas, served with mint & tamarind chutney.',
+      price: 25.0,
+      category: 'Snacks',
+      isVeg: true,
+      imageUrl: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80',
+      prepTimeMinutes: 5,
+      calories: 280,
+      isPopular: true,
+    ),
+    FoodItem(
+      id: 'item_2',
+      name: 'Special Masala Chai',
+      description: 'Freshly brewed aromatic campus tea infused with crushed ginger, cardamom, and whole spices.',
+      price: 15.0,
+      category: 'Beverages',
+      isVeg: true,
+      imageUrl: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80',
+      prepTimeMinutes: 3,
+      calories: 90,
+      isPopular: true,
+    ),
+    FoodItem(
+      id: 'item_3',
+      name: 'Paneer Tikka Kathi Roll',
+      description: 'Flaky paratha layered with marinated tandoori paneer cubes, crunchy onions, and zesty mint sauce.',
+      price: 90.0,
+      category: 'Mains',
+      isVeg: true,
+      imageUrl: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80',
+      prepTimeMinutes: 10,
+      calories: 420,
+      isPopular: true,
+    ),
+    FoodItem(
+      id: 'item_4',
+      name: 'Classic Butter Pav Bhaji',
+      description: 'Rich spiced mashed vegetable curry topped with a dollop of butter, served with 2 toasted pavs.',
+      price: 80.0,
+      category: 'Mains',
+      isVeg: true,
+      imageUrl: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80',
+      prepTimeMinutes: 8,
+      calories: 510,
+      isPopular: true,
+    ),
+    FoodItem(
+      id: 'item_5',
+      name: 'Campus Veggie Burger Deluxe',
+      description: 'Crispy herb potato patty with fresh iceberg lettuce, sliced tomatoes, cheese slice & secret burger mayo.',
+      price: 65.0,
+      category: 'Fast Food',
+      isVeg: true,
+      imageUrl: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
+      prepTimeMinutes: 7,
+      calories: 380,
+      isPopular: false,
+    ),
+    FoodItem(
+      id: 'item_6',
+      name: 'Iced Cold Coffee',
+      description: 'Chilled creamy blended coffee topped with chocolate syrup drizzle.',
+      price: 45.0,
+      category: 'Beverages',
+      isVeg: true,
+      imageUrl: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80',
+      prepTimeMinutes: 4,
+      calories: 190,
+      isPopular: true,
+    ),
+    FoodItem(
+      id: 'item_7',
+      name: 'Chole Bhature Platter',
+      description: 'Authentic Amritsari spicy chickpeas served with two puffed bhaturas, pickled carrots & onion rings.',
+      price: 95.0,
+      category: 'Mains',
+      isVeg: true,
+      imageUrl: 'https://images.unsplash.com/photo-1626132647523-66f5bf380027?auto=format&fit=crop&w=600&q=80',
+      prepTimeMinutes: 12,
+      calories: 640,
+      isPopular: true,
+    ),
+    FoodItem(
+      id: 'item_8',
+      name: 'Alphonso Mango Lassi',
+      description: 'Thick creamy sweetened yogurt shake blended with authentic Alphonso mango pulp and pistachios.',
+      price: 50.0,
+      category: 'Beverages',
+      isVeg: true,
+      imageUrl: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&w=600&q=80',
+      prepTimeMinutes: 4,
+      calories: 220,
+      isPopular: false,
+    ),
+  ];
+}
