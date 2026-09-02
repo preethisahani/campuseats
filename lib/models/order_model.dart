@@ -17,6 +17,8 @@ class OrderModel {
   final DateTime timestamp;
   final String? paymentMethod;
   final String? notes;
+  final int? splitCount;
+  final double? perPersonShare;
 
   OrderModel({
     required this.id,
@@ -32,6 +34,8 @@ class OrderModel {
     required this.timestamp,
     this.paymentMethod = 'Campus UPI Pay',
     this.notes,
+    this.splitCount,
+    this.perPersonShare,
   });
 
   int get totalItemCount => items.fold(0, (acc, i) => acc + i.quantity);
@@ -102,6 +106,8 @@ class OrderModel {
       'timestamp': FieldValue.serverTimestamp(),
       'paymentMethod': paymentMethod,
       'notes': notes,
+      'splitCount': splitCount,
+      'perPersonShare': perPersonShare,
     };
   }
 
@@ -138,6 +144,8 @@ class OrderModel {
       timestamp: parsedDate,
       paymentMethod: map['paymentMethod'] ?? 'Campus UPI Pay',
       notes: map['notes'],
+      splitCount: (map['splitCount'] as num?)?.toInt(),
+      perPersonShare: (map['perPersonShare'] as num?)?.toDouble(),
     );
   }
 
@@ -155,6 +163,8 @@ class OrderModel {
     DateTime? timestamp,
     String? paymentMethod,
     String? notes,
+    int? splitCount,
+    double? perPersonShare,
   }) {
     return OrderModel(
       id: id ?? this.id,
@@ -170,6 +180,8 @@ class OrderModel {
       timestamp: timestamp ?? this.timestamp,
       paymentMethod: paymentMethod ?? this.paymentMethod,
       notes: notes ?? this.notes,
+      splitCount: splitCount ?? this.splitCount,
+      perPersonShare: perPersonShare ?? this.perPersonShare,
     );
   }
 }

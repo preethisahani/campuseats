@@ -25,6 +25,7 @@ class _CanteenMenuScreenState extends State<CanteenMenuScreen> {
     'Beverages',
     'Mains',
     'Fast Food',
+    'Lunch Specials',
   ];
 
   @override
@@ -33,6 +34,9 @@ class _CanteenMenuScreenState extends State<CanteenMenuScreen> {
     final menu = AppConstants.defaultMenu;
 
     final filteredItems = menu.where((item) {
+      if (_selectedCategory == 'Lunch Specials') {
+        return ['item_9', 'item_10', 'item_11', 'item_12'].contains(item.id);
+      }
       if (_selectedCategory != 'All' && item.category != _selectedCategory) {
         return false;
       }
@@ -131,6 +135,11 @@ class _CanteenMenuScreenState extends State<CanteenMenuScreen> {
                           // Handled inside AIOrderBar & AppState
                         },
                       ),
+
+                      const SizedBox(height: 24),
+
+                      // Lunch Specials section
+                      _buildLunchSpecialsSection(context, menu, appState),
 
                       const SizedBox(height: 32),
 
@@ -347,18 +356,18 @@ class _CanteenMenuScreenState extends State<CanteenMenuScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: Colors.green, width: 1.5),
+                    border: Border.all(color: food.isVeg ? Colors.green : Colors.red, width: 1.5),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.circle, color: Colors.green, size: 8),
+                      Icon(Icons.circle, color: food.isVeg ? Colors.green : Colors.red, size: 8),
                       const SizedBox(width: 4),
                       Text(
-                        'VEG',
+                        food.isVeg ? 'VEG' : 'NON-VEG',
                         style: GoogleFonts.beVietnamPro(
                           fontSize: 9,
                           fontWeight: FontWeight.w800,
-                          color: Colors.green[800],
+                          color: food.isVeg ? Colors.green[800] : Colors.red[800],
                         ),
                       ),
                     ],
@@ -394,7 +403,7 @@ class _CanteenMenuScreenState extends State<CanteenMenuScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        food.name,
+                        '${food.isVeg ? "🟢" : "🔴"} ${food.name} — ₹${food.price.toStringAsFixed(0)}',
                         style: GoogleFonts.plusJakartaSans(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
@@ -402,14 +411,6 @@ class _CanteenMenuScreenState extends State<CanteenMenuScreen> {
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Text(
-                      '₹${food.price.toStringAsFixed(0)}',
-                      style: GoogleFonts.plusJakartaSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                        color: AppTheme.primary,
                       ),
                     ),
                   ],
@@ -488,6 +489,176 @@ class _CanteenMenuScreenState extends State<CanteenMenuScreen> {
                     ),
                   ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLunchSpecialsSection(BuildContext context, List<FoodItem> menu, AppState appState) {
+    final specials = menu.where((item) => ['item_9', 'item_10', 'item_11', 'item_12'].contains(item.id)).toList();
+    if (specials.isEmpty) return const SizedBox.shrink();
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [AppTheme.accentOrange, AppTheme.primary],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: AppTheme.shadowLevel2,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.wb_sunny_rounded, color: Colors.white, size: 22),
+                  const SizedBox(width: 8),
+                  Text(
+                    '☀️ Lunch Specials',
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(99),
+                ),
+                child: Text(
+                  'Available during lunch: 12:30 PM – 2:00 PM',
+                  style: GoogleFonts.beVietnamPro(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: specials.map((food) {
+                final cartItem = appState.cart.cast<dynamic>().firstWhere(
+                      (c) => c.item.id == food.id,
+                      orElse: () => null,
+                    );
+                final inCartQty = cartItem?.quantity ?? 0;
+
+                return Container(
+                  width: 280,
+                  margin: const EdgeInsets.only(right: 14),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: AppTheme.shadowLevel1,
+                  ),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          food.imageUrl,
+                          width: 64,
+                          height: 64,
+                          fit: BoxFit.cover,
+                          errorBuilder: (c, e, s) => Container(
+                            width: 64,
+                            height: 64,
+                            color: AppTheme.surfaceLow,
+                            child: const Icon(Icons.fastfood, size: 24, color: AppTheme.outline),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '${food.isVeg ? "🟢" : "🔴"} ${food.name}',
+                              style: GoogleFonts.plusJakartaSans(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.primary,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              '₹${food.price.toStringAsFixed(0)}',
+                              style: GoogleFonts.plusJakartaSans(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w800,
+                                color: AppTheme.accentOrange,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            if (inCartQty == 0)
+                              SizedBox(
+                                height: 28,
+                                child: ElevatedButton(
+                                  onPressed: () => appState.addToCart(food),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppTheme.primary,
+                                    foregroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                                    minimumSize: Size.zero,
+                                  ),
+                                  child: Text(
+                                    '+ Add',
+                                    style: GoogleFonts.beVietnamPro(fontSize: 11, fontWeight: FontWeight.w800),
+                                  ),
+                                ),
+                              )
+                            else
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () => appState.updateQuantity(food, inCartQty - 1),
+                                    icon: const Icon(Icons.remove_circle_outline, size: 18, color: AppTheme.accentOrange),
+                                    padding: EdgeInsets.zero,
+                                    constraints: const BoxConstraints(),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    '$inCartQty',
+                                    style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w800),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  IconButton(
+                                    onPressed: () => appState.addToCart(food),
+                                    icon: const Icon(Icons.add_circle_outline, size: 18, color: AppTheme.accentOrange),
+                                    padding: EdgeInsets.zero,
+                                    constraints: const BoxConstraints(),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
             ),
           ),
         ],

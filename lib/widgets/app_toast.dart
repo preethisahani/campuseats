@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../config/app_theme.dart';
 
 class AppToast {
-  static void showSuccess(BuildContext context, String message) {
+  static void showSuccess(BuildContext context, String message, {Duration duration = const Duration(seconds: 5)}) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -35,7 +35,7 @@ class AppToast {
             ),
           ],
         ),
-        duration: const Duration(seconds: 3),
+        duration: duration,
       ),
     );
   }
@@ -109,7 +109,7 @@ class AppToast {
             ),
           ],
         ),
-        duration: const Duration(seconds: 4),
+        duration: const Duration(seconds: 5),
       ),
     );
   }
@@ -156,7 +156,7 @@ class AppToast {
             ),
           ],
         ),
-        duration: const Duration(seconds: 4),
+        duration: const Duration(seconds: 5),
       ),
     );
   }

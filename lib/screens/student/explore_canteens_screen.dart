@@ -116,6 +116,42 @@ class _ExploreCanteensScreenState extends State<ExploreCanteensScreen> {
 
                   const SizedBox(height: 32),
 
+                  // Live Rush Status relocated from home
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 32),
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: AppTheme.primary,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: AppTheme.shadowLevel2,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Icon(Icons.speed_rounded, color: AppTheme.accentOrange, size: 22),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Live Rush Status',
+                              style: GoogleFonts.plusJakartaSans(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        _buildLiveRushBar('Canteen A (SAC)', 45, '8-12m wait', AppTheme.fastPickGreen),
+                        const SizedBox(height: 12),
+                        _buildLiveRushBar('Engineering Bistro', 78, '18-22m wait', AppTheme.busyOrange),
+                        const SizedBox(height: 12),
+                        _buildLiveRushBar('Green Leaf Cafe', 25, '5m wait', AppTheme.fastPickGreen),
+                      ],
+                    ),
+                  ),
+
                   // Canteens List
                   if (filteredCanteens.isEmpty)
                     Container(
@@ -292,6 +328,41 @@ class _ExploreCanteensScreenState extends State<ExploreCanteensScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildLiveRushBar(String name, int occupancy, String wait, Color color) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: Text(
+                name,
+                style: GoogleFonts.beVietnamPro(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w600),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              '$occupancy% • $wait',
+              style: GoogleFonts.beVietnamPro(fontSize: 12, color: Colors.white70, fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(99),
+          child: LinearProgressIndicator(
+            value: occupancy / 100.0,
+            backgroundColor: Colors.white24,
+            valueColor: AlwaysStoppedAnimation<Color>(color),
+            minHeight: 6,
+          ),
+        ),
+      ],
     );
   }
 }

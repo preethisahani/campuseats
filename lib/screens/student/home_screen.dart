@@ -88,23 +88,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           const SizedBox(height: 12),
-                          // Personalized Greeting
-  Text(
-  'Welcome, ${() {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user?.displayName?.isNotEmpty == true) return user!.displayName!;
-    if (user?.email?.contains('@') == true) {
-      final prefix = user!.email!.split('@').first;
-      return prefix[0].toUpperCase() + prefix.substring(1);
-    }
-    return 'Student';
-  }()}!',
-  style: GoogleFonts.plusJakartaSans(
-    fontSize: isMobile ? 18 : 22,
-    fontWeight: FontWeight.w700,
-    color: AppTheme.accentOrange,
-  ),
-),
+                          Text(
+                            'Welcome, ${appState.userName}! 👋 What would you like to have today?',
+                            style: GoogleFonts.plusJakartaSans(
+                              fontSize: isMobile ? 18 : 22,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.accentOrange,
+                            ),
+                          ),
                           const SizedBox(height: 8),
                           Text(
                             'Skip the Campus Line.\nSavor Every Break.',
@@ -167,37 +158,30 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       );
 
-                      final rightContent = Container(
-                        padding: const EdgeInsets.all(24),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.08),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(Icons.speed_rounded, color: AppTheme.accentOrange, size: 22),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Live Rush Status',
-                                  style: GoogleFonts.plusJakartaSans(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            _buildLiveRushBar('Canteen A (SAC)', 45, '8-12m wait', AppTheme.fastPickGreen),
-                            const SizedBox(height: 12),
-                            _buildLiveRushBar('Engineering Bistro', 78, '18-22m wait', AppTheme.busyOrange),
-                            const SizedBox(height: 12),
-                            _buildLiveRushBar('Green Leaf Cafe', 25, '5m wait', AppTheme.fastPickGreen),
-                          ],
+                      final rightContent = ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          'https://images.unsplash.com/photo-1567521464027-f127ff144326?q=80&w=600&auto=format&fit=crop',
+                          fit: BoxFit.cover,
+                          height: isMobile ? 220 : 280,
+                          width: double.infinity,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Container(
+                              height: isMobile ? 220 : 280,
+                              color: Colors.white.withValues(alpha: 0.08),
+                              child: const Center(
+                                child: CircularProgressIndicator(color: AppTheme.accentOrange),
+                              ),
+                            );
+                          },
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              height: isMobile ? 220 : 280,
+                              color: Colors.white.withValues(alpha: 0.08),
+                              child: const Icon(Icons.restaurant, color: Colors.white30, size: 48),
+                            );
+                          },
                         ),
                       );
 
@@ -237,6 +221,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       // Top Active/Previous Order Card
                       _buildTopActiveOrderCard(appState),
+
+                      // Quick Reorder Feature
+                      _buildQuickReorderSection(context, appState),
+                      const SizedBox(height: 16),
 
                       // AI Fast Order Banner
                       Container(
@@ -644,18 +632,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: Colors.green, width: 1.5),
+                    border: Border.all(color: food.isVeg ? Colors.green : Colors.red, width: 1.5),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.circle, color: Colors.green, size: 8),
+                      Icon(Icons.circle, color: food.isVeg ? Colors.green : Colors.red, size: 8),
                       const SizedBox(width: 4),
                       Text(
-                        'VEG',
+                        food.isVeg ? 'VEG' : 'NON-VEG',
                         style: GoogleFonts.beVietnamPro(
                           fontSize: 9,
                           fontWeight: FontWeight.w800,
-                          color: Colors.green[800],
+                          color: food.isVeg ? Colors.green[800] : Colors.red[800],
                         ),
                       ),
                     ],
@@ -686,7 +674,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  food.name,
+                  '${food.isVeg ? "🟢" : "🔴"} ${food.name} — ₹${food.price.toStringAsFixed(0)}',
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
@@ -719,7 +707,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         appState.addToCart(food);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            duration: const Duration(seconds: 2),
+                            duration: const Duration(seconds: 5),
                             backgroundColor: AppTheme.primary,
                             content: Text(
                               'Added ${food.name} to cart!',
@@ -937,6 +925,122 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   );
                 },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildQuickReorderSection(BuildContext context, AppState appState) {
+    return StreamBuilder<List<OrderModel>>(
+      stream: FirestoreService.instance.streamOrders(),
+      builder: (context, snapshot) {
+        final orders = snapshot.data ?? [];
+        final userCompletedOrders = orders.where((o) => o.studentId == appState.userId).toList();
+
+        List<FoodItem> reorderItems = [];
+        String comboName = "";
+
+        if (userCompletedOrders.isNotEmpty) {
+          final lastOrder = userCompletedOrders.first;
+          reorderItems = lastOrder.items.map((c) => c.item).toList();
+          comboName = lastOrder.itemsSummary;
+        } else {
+          try {
+            final vegRice = AppConstants.defaultMenu.firstWhere((i) => i.id == 'item_9');
+            final coke = AppConstants.defaultMenu.firstWhere((i) => i.id == 'item_13');
+            reorderItems = [vegRice, coke];
+            comboName = "Veg Fried Rice + Chilled Coke Can";
+          } catch (_) {
+            comboName = "Samosa + Masala Chai";
+            if (AppConstants.defaultMenu.length >= 2) {
+              reorderItems = [AppConstants.defaultMenu[0], AppConstants.defaultMenu[1]];
+            }
+          }
+        }
+
+        return Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: AppTheme.surfaceWhite,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: AppTheme.surfaceContainer, width: 1.5),
+            boxShadow: AppTheme.shadowLevel1,
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppTheme.accentOrangeLight,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(Icons.replay_circle_filled_rounded, color: AppTheme.accentOrange, size: 28),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '🔄 Quick Reorder',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        color: AppTheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      comboName,
+                      style: GoogleFonts.beVietnamPro(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.onSurface,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      'Tap to instantly add these items to your cart',
+                      style: GoogleFonts.beVietnamPro(fontSize: 11, color: AppTheme.onSurfaceVariant),
+                    ),
+                  ],
+                ),
+              ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  if (reorderItems.isNotEmpty) {
+                    for (final item in reorderItems) {
+                      appState.addToCart(item);
+                    }
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: AppTheme.fastPickGreen,
+                        content: Text('Reordered: $comboName added to cart!', style: GoogleFonts.beVietnamPro()),
+                        action: SnackBarAction(
+                          label: 'Checkout',
+                          textColor: Colors.white,
+                          onPressed: () => Navigator.pushNamed(context, '/checkout_slots'),
+                        ),
+                        duration: const Duration(seconds: 5),
+                      ),
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.primary,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+                icon: const Icon(Icons.shopping_cart_outlined, size: 16),
+                label: Text(
+                  'Reorder',
+                  style: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w800, fontSize: 13),
+                ),
               ),
             ],
           ),

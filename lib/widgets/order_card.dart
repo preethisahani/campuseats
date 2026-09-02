@@ -60,6 +60,14 @@ class OrderCard extends StatelessWidget {
     showDialog(
       context: context,
       builder: (ctx) {
+        Future.delayed(const Duration(seconds: 5), () {
+          if (ctx.mounted) {
+            final route = ModalRoute.of(ctx);
+            if (route != null && route.isCurrent) {
+              Navigator.of(ctx).pop();
+            }
+          }
+        });
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           titlePadding: const EdgeInsets.fromLTRB(24, 24, 24, 12),
@@ -563,6 +571,7 @@ class OrderCard extends StatelessWidget {
                               'Order ${order.tokenNumber} marked Unclaimed! 1 Strike added to ${order.studentName}.',
                               style: GoogleFonts.beVietnamPro(),
                             ),
+                            duration: const Duration(seconds: 5),
                           ),
                         );
                       },
@@ -620,6 +629,7 @@ class OrderCard extends StatelessWidget {
                               'Order marked Unclaimed! Strike count incremented for ${order.studentId}.',
                               style: GoogleFonts.beVietnamPro(),
                             ),
+                            duration: const Duration(seconds: 5),
                           ),
                         );
                       } else if (action == 'cancel_timeout') {

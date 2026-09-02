@@ -320,6 +320,14 @@ class FirestoreService {
     );
   }
 
+  OrderModel? getOrderById(String orderId) {
+    try {
+      return _inMemoryOrders.firstWhere((o) => o.id == orderId);
+    } catch (_) {
+      return null;
+    }
+  }
+
   // Stream of slot crowd capacities
   Stream<Map<String, SlotCapacity>> streamSlotCapacities() {
     Future.microtask(() => _emitState());

@@ -16,8 +16,8 @@ class AppState extends ChangeNotifier {
   bool _isAuthenticated = true;
   UserRole _role = UserRole.student;
   String _userId = 'STU-2024-88';
-  String _userName = 'Aarav Sharma';
-  String _userEmail = 'aarav.sharma@campus.edu';
+  String _userName = 'Student';
+  String _userEmail = 'student@campus.edu';
 
   // Active Canteen Selection
   String _selectedCanteenId = 'canteen_a';
@@ -131,8 +131,8 @@ class AppState extends ChangeNotifier {
       _userEmail = 'kitchen.canteenA@campus.edu';
     } else {
       _userId = 'STU-2024-88';
-      _userName = 'Aarav Sharma';
-      _userEmail = 'aarav.sharma@campus.edu';
+      _userName = 'Student';
+      _userEmail = 'student@campus.edu';
     }
     _initStrikeListener();
     notifyListeners();

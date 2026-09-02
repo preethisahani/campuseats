@@ -74,6 +74,14 @@ class _AIOrderBarState extends State<AIOrderBar> {
     showDialog(
       context: context,
       builder: (ctx) {
+        Future.delayed(const Duration(seconds: 5), () {
+          if (ctx.mounted) {
+            final route = ModalRoute.of(ctx);
+            if (route != null && route.isCurrent) {
+              Navigator.of(ctx).pop();
+            }
+          }
+        });
         return StatefulBuilder(
           builder: (context, setDialogState) {
             final total = result.items.fold(0.0, (sum, i) => sum + i.totalPrice);
@@ -268,6 +276,7 @@ class _AIOrderBarState extends State<AIOrderBar> {
                             Navigator.pushNamed(context, '/checkout_slots');
                           },
                         ),
+                        duration: const Duration(seconds: 5),
                       ),
                     );
                   },

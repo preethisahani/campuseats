@@ -51,7 +51,7 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(
-                        Icons.restaurant_rounded,
+                        Icons.restaurant,
                         color: AppTheme.accentOrange,
                         size: 22,
                       ),

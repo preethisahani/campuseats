@@ -90,7 +90,7 @@ class OrderStatusScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Live Order Tracking',
+                                '🎉 Order Placed Successfully!',
                                 style: GoogleFonts.plusJakartaSans(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w800,
@@ -110,7 +110,7 @@ class OrderStatusScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              'Token: ${activeOrder.tokenNumber}',
+                              'Order ID: ${activeOrder.orderNumber}',
                               style: GoogleFonts.plusJakartaSans(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w800,
@@ -137,6 +137,56 @@ class OrderStatusScreen extends StatelessWidget {
 
                       // Status Progress Stepper Card
                       _buildStatusProgressCard(activeOrder),
+
+                      const SizedBox(height: 24),
+
+                      // Estimated Waiting Time Card
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: AppTheme.softPeach,
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(color: AppTheme.accentOrange.withValues(alpha: 0.5), width: 1.5),
+                          boxShadow: AppTheme.shadowLevel1,
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: AppTheme.accentOrange,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(Icons.timer_outlined, color: Colors.white, size: 28),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Estimated Waiting Time',
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 15,
+                                      color: AppTheme.primary,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    '15–20 minutes. Please collect your order from the canteen counter.',
+                                    style: GoogleFonts.beVietnamPro(
+                                      fontSize: 13,
+                                      color: AppTheme.onSurfaceVariant,
+                                      height: 1.4,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
 
                       const SizedBox(height: 24),
 
@@ -282,11 +332,9 @@ class OrderStatusScreen extends StatelessWidget {
   }
 
   Widget _buildStatusProgressCard(OrderModel order) {
-    int currentStep = 0;
-    if (order.status == 'Pending' || order.status == 'Paid & Processing') currentStep = 1;
+    int currentStep = 1;
     if (order.status == 'Preparing') currentStep = 2;
-    if (order.status == 'Ready') currentStep = 3;
-    if (order.status == 'Completed') currentStep = 4;
+    if (order.status == 'Ready' || order.status == 'Completed') currentStep = 3;
 
     final isCancelled = order.status.startsWith('Cancelled') || order.status == 'Unclaimed';
 
@@ -346,7 +394,7 @@ class OrderStatusScreen extends StatelessWidget {
                               ? '🍳 Kitchen is Preparing Your Meal'
                               : isCancelled
                                   ? '❌ ${order.status}'
-                                  : '⏳ Order Received & Queued',
+                                  : '⏳ Order Placed Successfully',
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 18,
                         fontWeight: FontWeight.w800,
@@ -378,7 +426,7 @@ class OrderStatusScreen extends StatelessWidget {
             children: [
               _buildStepNode(
                 stepNum: 1,
-                title: 'Received',
+                title: 'Order Placed',
                 isActive: currentStep >= 1,
                 isCurrent: currentStep == 1,
                 isCancelled: isCancelled,
@@ -394,17 +442,9 @@ class OrderStatusScreen extends StatelessWidget {
               _buildStepConnector(isActive: currentStep >= 3),
               _buildStepNode(
                 stepNum: 3,
-                title: 'Ready',
+                title: 'Ready for Pickup',
                 isActive: currentStep >= 3,
                 isCurrent: currentStep == 3,
-                isCancelled: isCancelled,
-              ),
-              _buildStepConnector(isActive: currentStep >= 4),
-              _buildStepNode(
-                stepNum: 4,
-                title: 'Picked Up',
-                isActive: currentStep >= 4,
-                isCurrent: currentStep == 4,
                 isCancelled: isCancelled,
               ),
             ],
@@ -875,6 +915,7 @@ class _CashPaymentCountdownBannerState extends State<_CashPaymentCountdownBanner
                     SnackBar(
                       backgroundColor: AppTheme.fastPickGreen,
                       content: Text('Cash payment verified! Order moved to Preparing.', style: GoogleFonts.beVietnamPro()),
+                      duration: const Duration(seconds: 5),
                     ),
                   );
                 },

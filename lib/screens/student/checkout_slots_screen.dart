@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -22,6 +23,8 @@ class CheckoutSlotsScreen extends StatefulWidget {
 class _CheckoutSlotsScreenState extends State<CheckoutSlotsScreen> {
   bool _isPlacingOrder = false;
   final TextEditingController _notesController = TextEditingController();
+  bool _isSplitEnabled = false;
+  int _splitPeopleCount = 2;
 
   Future<void> _handlePlaceOrder(AppState appState, {bool isDemoScanPay = false}) async {
     if (appState.cart.isEmpty) {
@@ -32,6 +35,7 @@ class _CheckoutSlotsScreenState extends State<CheckoutSlotsScreen> {
             'Your cart is empty. Please add items from the menu first.',
             style: GoogleFonts.beVietnamPro(),
           ),
+          duration: const Duration(seconds: 5),
         ),
       );
       return;
@@ -48,6 +52,9 @@ class _CheckoutSlotsScreenState extends State<CheckoutSlotsScreen> {
           paymentMethod == 'Campus UPI Pay' ||
           isDemoScanPay;
 
+      // Simulated 2-second payment process delay that reliably completes
+      await Future.delayed(const Duration(seconds: 2));
+
       final newOrder = OrderModel(
         id: '',
         orderNumber: '',
@@ -62,6 +69,8 @@ class _CheckoutSlotsScreenState extends State<CheckoutSlotsScreen> {
         timestamp: DateTime.now(),
         paymentMethod: paymentMethod,
         notes: _notesController.text.trim().isNotEmpty ? _notesController.text.trim() : null,
+        splitCount: _isSplitEnabled ? _splitPeopleCount : null,
+        perPersonShare: _isSplitEnabled ? (appState.finalTotal / _splitPeopleCount) : null,
       );
 
       final orderId = await FirestoreService.instance.placeOrder(newOrder);
@@ -74,10 +83,7 @@ class _CheckoutSlotsScreenState extends State<CheckoutSlotsScreen> {
 
       if (!mounted) return;
       
-      final placedOrders = await FirestoreService.instance.streamOrders().first;
-      if (!mounted) return;
-
-      final placedOrder = placedOrders.cast<OrderModel?>().firstWhere((o) => o?.id == orderId, orElse: () => null);
+      final placedOrder = FirestoreService.instance.getOrderById(orderId);
       final token = placedOrder?.tokenNumber ?? '#EATS-1042';
 
       AppToast.showOrderConfirmation(
@@ -101,6 +107,7 @@ class _CheckoutSlotsScreenState extends State<CheckoutSlotsScreen> {
         SnackBar(
           backgroundColor: AppTheme.capReachedRed,
           content: Text('Failed to place order: $e', style: GoogleFonts.beVietnamPro()),
+          duration: const Duration(seconds: 5),
         ),
       );
     }
@@ -463,6 +470,154 @@ class _CheckoutSlotsScreenState extends State<CheckoutSlotsScreen> {
                               ],
                             ),
                           ),
+
+                          const SizedBox(height: 24),
+
+                          // Split Bill with Friends Card
+                          Container(
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: AppTheme.surfaceWhite,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: AppTheme.surfaceContainer),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Icon(Icons.people_alt_rounded, size: 20, color: AppTheme.primary),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        'Split Bill with Friends 👥',
+                                        style: GoogleFonts.plusJakartaSans(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 16,
+                                          color: AppTheme.primary,
+                                        ),
+                                      ),
+                                    ),
+                                    Switch(
+                                      value: _isSplitEnabled,
+                                      activeColor: AppTheme.accentOrange,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          _isSplitEnabled = val;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                if (_isSplitEnabled) ...[
+                                  const SizedBox(height: 16),
+                                  const Divider(height: 1, color: AppTheme.surfaceContainer),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Number of People:',
+                                        style: GoogleFonts.beVietnamPro(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppTheme.onSurface,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: _splitPeopleCount > 2
+                                                ? () => setState(() => _splitPeopleCount--)
+                                                : null,
+                                            icon: const Icon(Icons.remove_circle_outline, color: AppTheme.accentOrange),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                                            child: Text(
+                                              '$_splitPeopleCount',
+                                              style: GoogleFonts.plusJakartaSans(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w800,
+                                              ),
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed: _splitPeopleCount < 6
+                                                ? () => setState(() => _splitPeopleCount++)
+                                                : null,
+                                            icon: const Icon(Icons.add_circle_outline, color: AppTheme.accentOrange),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Per Person Share:',
+                                        style: GoogleFonts.beVietnamPro(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppTheme.onSurface,
+                                        ),
+                                      ),
+                                      Text(
+                                        '₹${(appState.finalTotal / _splitPeopleCount).toStringAsFixed(2)} / person',
+                                        style: GoogleFonts.plusJakartaSans(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w800,
+                                          color: AppTheme.accentOrange,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 16),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: OutlinedButton.icon(
+                                      onPressed: () {
+                                        final shareAmount = appState.finalTotal / _splitPeopleCount;
+                                        final mockOrderId = 'CE-${(1000 + (DateTime.now().millisecond % 9000))}';
+                                        final summaryText = 'Pay ₹${shareAmount.toStringAsFixed(2)} for Order #$mockOrderId via GPay/PhonePe';
+                                        
+                                        Clipboard.setData(ClipboardData(text: summaryText));
+                                        
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            backgroundColor: AppTheme.fastPickGreen,
+                                            content: Text(
+                                              'Copied split payment info: "$summaryText"',
+                                              style: GoogleFonts.beVietnamPro(),
+                                            ),
+                                            duration: const Duration(seconds: 5),
+                                          ),
+                                        );
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        foregroundColor: AppTheme.primary,
+                                        side: const BorderSide(color: AppTheme.surfaceContainer, width: 1.5),
+                                        padding: const EdgeInsets.symmetric(vertical: 12),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      icon: const Icon(Icons.share_rounded, size: 16),
+                                      label: Text(
+                                        'Share Split UPI Link / QR',
+                                        style: GoogleFonts.plusJakartaSans(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
                         ],
                       );
 
@@ -712,7 +867,7 @@ class _CheckoutSlotsScreenState extends State<CheckoutSlotsScreen> {
                                 label: Text(
                                   _isPlacingOrder
                                       ? 'Processing...'
-                                      : 'Place Order (₹${appState.finalTotal.toStringAsFixed(0)})',
+                                      : 'Proceed to Payment (₹${appState.finalTotal.toStringAsFixed(0)})',
                                   style: GoogleFonts.plusJakartaSans(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w800,
